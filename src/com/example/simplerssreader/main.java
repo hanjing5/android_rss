@@ -16,9 +16,9 @@ public class main extends Activity {
 	ListView Items;
 	ArrayAdapter<Item> adapter;
 	RssFeed feed;
-
+	public Activity activity = this;
+	
 	private class DowloadFeed extends AsyncTask<String, Void, String>{
-		
 		@Override
 		protected String doInBackground(String... urls) {
 			String response = "";
@@ -52,6 +52,15 @@ public class main extends Activity {
 			//String err = (e.getMessage()==null)?"Main Failure":e.getMessage();
 			//Log.e("SimpleRssReader", err);
 			//}
+			
+			runOnUiThread(new Runnable(){
+		        public void run(){
+		            ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(activity, android.R.layout.simple_list_item_1, feed.getItems());
+
+		    		Items.setAdapter(adapter);
+		    		Items.setOnItemClickListener(new ListListener(feed.getItems(), activity));
+		        }
+		    });
 		}
 
 	}
@@ -69,10 +78,7 @@ public class main extends Activity {
 
 		// Create a list adapter
 		//ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1, feed.getItems());
-		adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1, feed.getItems());
-
-		Items.setAdapter(adapter);
-		Items.setOnItemClickListener(new ListListener(feed.getItems(), this));
+		
 	}
 
 
