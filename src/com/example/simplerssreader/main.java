@@ -17,7 +17,7 @@ public class main extends Activity {
 	ArrayAdapter<Item> adapter;
 	RssFeed feed;
 	public Activity activity = this;
-	
+
 	private class DowloadFeed extends AsyncTask<String, Void, String>{
 		@Override
 		protected String doInBackground(String... urls) {
@@ -34,33 +34,20 @@ public class main extends Activity {
 
 		@Override
 		protected void onPostExecute(String result) {
-			//Items.setText(result);
 			Log.e("MAIN","Looping Views");
 			System.out.println(feed);
-			//
 			//for (int i = 0; i < feed.getItems().size(); i++) 
-				//Log.e("MAIN",feed.getItems().get(i).title); 
+			//Log.e("MAIN",feed.getItems().get(i).title); 
 			//for (Item i:feed.getItems())
 			//	Log.e("MAIN",i.getLink());
-			Items = (ListView)findViewById(R.id.listView1);
-			//ItemAdapter ia = new ItemAdapter(this, Items);
-			//ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1, feed.getItems());
-			//Items.setAdapter(adapter);
-			//Items.setOnItemClickListener(new ListListener(feed.getItems(), R.layout.main));
-			//}
-			//catch (Exception e){
-			//String err = (e.getMessage()==null)?"Main Failure":e.getMessage();
-			//Log.e("SimpleRssReader", err);
-			//}
 			
-			//runOnUiThread(new Runnable(){
-		    //    public void run(){
-		            ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(activity, android.R.layout.simple_list_item_1, feed.getItems());
+			// Create a list adapter
+			Items = (ListView)findViewById(R.id.listView1);
+			
+			ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(activity, android.R.layout.simple_list_item_1, feed.getItems());
 
-		    		Items.setAdapter(adapter);
-		    		Items.setOnItemClickListener(new ListListener(feed.getItems(), activity));
-		    //    }
-		    //});
+			Items.setAdapter(adapter);
+			Items.setOnItemClickListener(new ListListener(feed.getItems(), activity));
 		}
 
 	}
@@ -70,15 +57,12 @@ public class main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		//try {
 		//RssReader rssReader = new RssReader("http://www.southbendtribune.com/search/?q=&t=article&l=25&d=&d1=&d2=&s=start_time&sd=desc&c[]=sports/college*&f=rss");
-
 		DowloadFeed task = new DowloadFeed();
+		
+		//TODO: This is hard coded and not even the correct URL
 		task.execute(new String[] { "http://www.vogella.com" });
 
-		// Create a list adapter
-		//ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1, feed.getItems());
-		
 	}
 
 
