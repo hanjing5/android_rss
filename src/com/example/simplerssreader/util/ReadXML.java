@@ -24,10 +24,13 @@ public class ReadXML extends DefaultHandler
 	private Item          item; 
 	private boolean       imgStatus;
 	private List<Item> rssItems;
+	private final String TAG = "ReadXML";
 
 	public ReadXML(String url) 
 	{ 
 		this.urlString = url; 
+		System.out.println(url);
+		Log.e(TAG, url);
 		this.text = new StringBuilder(); 
 		
 	} 
@@ -210,5 +213,9 @@ public class ReadXML extends DefaultHandler
 		public String getLink() {
 			return link;
 		} 
+		
+		public String getTitle(){
+			return this.title;
+		}
 	} 
 }
