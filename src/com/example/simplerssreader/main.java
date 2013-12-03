@@ -53,14 +53,14 @@ public class main extends Activity {
 			//Log.e("SimpleRssReader", err);
 			//}
 			
-			runOnUiThread(new Runnable(){
-		        public void run(){
+			//runOnUiThread(new Runnable(){
+		    //    public void run(){
 		            ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(activity, android.R.layout.simple_list_item_1, feed.getItems());
 
 		    		Items.setAdapter(adapter);
 		    		Items.setOnItemClickListener(new ListListener(feed.getItems(), activity));
-		        }
-		    });
+		    //    }
+		    //});
 		}
 
 	}
